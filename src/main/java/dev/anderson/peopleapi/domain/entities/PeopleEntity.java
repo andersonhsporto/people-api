@@ -1,5 +1,6 @@
 package dev.anderson.peopleapi.domain.entities;
 
+import dev.anderson.peopleapi.domain.DTO.PeopleInputDTO;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -7,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 
@@ -56,6 +58,13 @@ public class PeopleEntity {
 
   public List<AddressEntity> getAddresses() {
     return addresses;
+  }
+
+  public void updateNameAndDate(PeopleInputDTO peopleInputDTO) {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+
+    this.name = peopleInputDTO.newName();
+    this.birthDate = LocalDate.parse(peopleInputDTO.newBirthDate(), formatter);
   }
 
   @Override

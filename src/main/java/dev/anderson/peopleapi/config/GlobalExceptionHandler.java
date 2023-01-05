@@ -1,6 +1,7 @@
 package dev.anderson.peopleapi.config;
 
 import dev.anderson.peopleapi.exceptions.UserExistsException;
+import dev.anderson.peopleapi.exceptions.UserNotFoundException;
 import java.time.format.DateTimeParseException;
 import java.util.Collections;
 import java.util.HashMap;
@@ -29,6 +30,14 @@ public class GlobalExceptionHandler {
     List<String> errors = Collections.singletonList(ex.getMessage());
 
     return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.BAD_REQUEST);
+  }
+
+  @ExceptionHandler(UserNotFoundException.class)
+  public ResponseEntity<Map<String, List<String>>> handleUserNotFoundException(
+      UserNotFoundException ex) {
+    List<String> errors = Collections.singletonList(ex.getMessage());
+
+    return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.NOT_FOUND);
   }
 
   private Map<String, List<String>> getErrorsMap(List<String> errors) {
