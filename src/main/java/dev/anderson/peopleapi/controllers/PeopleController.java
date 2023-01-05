@@ -5,6 +5,7 @@ import dev.anderson.peopleapi.service.implementation.PeopleServiceImplementation
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -45,5 +46,10 @@ public class PeopleController {
     return peopleServiceImplementation.replacePeople(peopleInputDTO);
   }
 
+  @PatchMapping
+  public ResponseEntity<?> updatePeople(
+      @RequestBody(required = true) PeopleInputDTO peopleInputDTO) {
+    return peopleServiceImplementation.updatePeople(peopleInputDTO);
+  }
 
 }

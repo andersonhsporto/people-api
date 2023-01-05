@@ -11,4 +11,6 @@ public interface PeopleService {
 
   ResponseEntity<?> replacePeople(PeopleInputDTO peopleInputDTO);
 
+  ResponseEntity<?> updatePeople(PeopleInputDTO peopleInputDTO);
+
 }

@@ -7,4 +7,5 @@ public record PeopleInputDTO(
     String newBirthDate
 ) {
 
+
 }

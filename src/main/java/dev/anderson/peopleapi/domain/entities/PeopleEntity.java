@@ -63,8 +63,12 @@ public class PeopleEntity {
   public void updateNameAndDate(PeopleInputDTO peopleInputDTO) {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
 
-    this.name = peopleInputDTO.newName();
-    this.birthDate = LocalDate.parse(peopleInputDTO.newBirthDate(), formatter);
+    if (!peopleInputDTO.newName().isEmpty()) {
+      this.name = peopleInputDTO.newName();
+    }
+    if (!peopleInputDTO.newBirthDate().isEmpty()) {
+      this.birthDate = LocalDate.parse(peopleInputDTO.newBirthDate(), formatter);
+    }
   }
 
   @Override
