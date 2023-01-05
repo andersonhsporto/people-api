@@ -1,9 +1,10 @@
-package dev.anderson.peopleapi.entities;
+package dev.anderson.peopleapi.domain.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import java.util.Objects;
 
 @Entity
@@ -21,14 +22,23 @@ public class AddressEntity {
 
   private String cep;
 
+  @ManyToOne
+  private PeopleEntity people;
+
   public AddressEntity() {
   }
 
-  public AddressEntity(String publicPlace, String number, String city, String cep) {
+  public AddressEntity(
+      String publicPlace,
+      String number,
+      String city,
+      String cep,
+      PeopleEntity people) {
     this.publicPlace = publicPlace;
     this.number = number;
     this.city = city;
     this.cep = cep;
+    this.people = people;
   }
 
   public Long getId() {
@@ -49,6 +59,10 @@ public class AddressEntity {
 
   public String getCep() {
     return cep;
+  }
+
+  public PeopleEntity getPeople() {
+    return people;
   }
 
   @Override

@@ -1,5 +1,6 @@
-package dev.anderson.peopleapi.entities;
+package dev.anderson.peopleapi.domain.entities;
 
+import dev.anderson.peopleapi.domain.DTO.PeopleInputDTO;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -7,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 
@@ -21,7 +23,7 @@ public class PeopleEntity {
 
   private LocalDate birthDate;
 
-  @OneToMany(mappedBy = "people", cascade = CascadeType.ALL)
+  @OneToMany(cascade = CascadeType.ALL)
   private List<AddressEntity> addresses;
 
   public PeopleEntity() {
@@ -31,6 +33,15 @@ public class PeopleEntity {
     this.name = name;
     this.birthDate = birthDate;
     this.addresses = addresses;
+  }
+
+  public PeopleEntity(String name, LocalDate birthDate) {
+    this.name = name;
+    this.birthDate = birthDate;
+  }
+
+  static public PeopleEntity of(String name, LocalDate birthDate) {
+    return new PeopleEntity(name, birthDate);
   }
 
   public Long getId() {
@@ -47,6 +58,17 @@ public class PeopleEntity {
 
   public List<AddressEntity> getAddresses() {
     return addresses;
+  }
+
+  public void updateNameAndDate(PeopleInputDTO peopleInputDTO) {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+
+    if (!peopleInputDTO.newName().isEmpty()) {
+      this.name = peopleInputDTO.newName();
+    }
+    if (!peopleInputDTO.newBirthDate().isEmpty()) {
+      this.birthDate = LocalDate.parse(peopleInputDTO.newBirthDate(), formatter);
+    }
   }
 
   @Override
