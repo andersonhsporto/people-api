@@ -16,14 +16,13 @@ public class PeopleController {
 
   private final PeopleServiceImplementation peopleServiceImplementation;
 
-
   public PeopleController(PeopleServiceImplementation peopleServiceImplementation) {
     this.peopleServiceImplementation = peopleServiceImplementation;
   }
 
-  @GetMapping
+  @GetMapping("/all")
   public ResponseEntity<?> listAll() {
-    return ResponseEntity.ok(peopleServiceImplementation.listAll());
+    return peopleServiceImplementation.listAll();
   }
 
   @PostMapping
