@@ -32,7 +32,9 @@ public class PeopleServiceImplementation implements PeopleService {
     Pageable pageRequest = PageRequest.of(page, size, Sort.by("name"));
     Page<PeopleEntity> peoplePages = peopleRepository.findAll(pageRequest);
 
-    return new ResponseEntity<>(PeopleDTO.fromPage(peoplePages), getTotalElements(peoplePages),
+    return new ResponseEntity<>(
+        PeopleDTO.fromPage(peoplePages),
+        getTotalElements(peoplePages),
         200);
   }
 
