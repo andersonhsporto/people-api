@@ -14,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -29,9 +30,10 @@ public class PeopleServiceImplementation implements PeopleService {
   @Override
   public ResponseEntity<?> listAll(Integer page, Integer size) {
     Pageable pageRequest = PageRequest.of(page, size, Sort.by("name"));
-    Page<PeopleEntity> peopleList = peopleRepository.findAll(pageRequest);
+    Page<PeopleEntity> peoplePages = peopleRepository.findAll(pageRequest);
 
-    return new ResponseEntity<>(PeopleDTO.fromPage(peopleList), null, 200);
+    return new ResponseEntity<>(PeopleDTO.fromPage(peoplePages), getTotalElements(peoplePages),
+        200);
   }
 
 //  @Override
@@ -88,6 +90,14 @@ public class PeopleServiceImplementation implements PeopleService {
     } else {
       return true;
     }
+  }
+
+  private HttpHeaders getTotalElements(Page<PeopleEntity> peopleEntity) {
+    HttpHeaders headers = new HttpHeaders();
+
+    headers.add("Access-Control-Expose-Headers", "X-Total-Count");
+    headers.add("x-total-count", String.valueOf(peopleEntity.getTotalElements()));
+    return headers;
   }
 
   private LocalDate parseDate(String date) {
