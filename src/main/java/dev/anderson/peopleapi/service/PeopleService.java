@@ -6,5 +6,6 @@ public interface PeopleService {
 
   ResponseEntity<?> listAll();
 
+  ResponseEntity<?> makePeople(String name, String birthDate);
 
 }
