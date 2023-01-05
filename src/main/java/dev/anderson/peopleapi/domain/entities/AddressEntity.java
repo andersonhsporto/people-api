@@ -1,4 +1,4 @@
-package dev.anderson.peopleapi.entities;
+package dev.anderson.peopleapi.domain.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
