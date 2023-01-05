@@ -7,6 +7,8 @@ public interface PeopleService {
 
   ResponseEntity<?> listAll(Integer page, Integer size);
 
+  ResponseEntity<?> findPeople(String name, String birthDate);
+
   ResponseEntity<?> makePeople(String name, String birthDate);
 
   ResponseEntity<?> replacePeople(PeopleInputDTO peopleInputDTO);

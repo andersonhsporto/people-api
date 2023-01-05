@@ -39,13 +39,21 @@ public class PeopleServiceImplementation implements PeopleService {
         200);
   }
 
-//  @Override
-//  public ResponseEntity<?> listAll() {
-//    PeopleEntity peopleEntity = peopleRepository.getReferenceById(1L);
-//
-//    return new ResponseEntity<>(PeopleDTO.of(peopleEntity.getName(), "TESTE"),
-//        null, 200);
-//  }
+  @Override
+  public ResponseEntity<?> findPeople(String name, String birthDate) {
+    LocalDate entityDate = parseDate(birthDate);
+
+    if (!peopleRepository.existsByNameAndBirthDate(name, entityDate)) {
+      throw new UserNotFoundException(
+          "People with name: " + name + " and Birth Date: "
+              + birthDate + "-> Not found"
+      );
+    }
+
+    Optional<PeopleEntity> peopleEntity
+        = peopleRepository.findByNameAndBirthDate(name, entityDate);
+    return new ResponseEntity<>(PeopleDTO.of(peopleEntity.get()), null, 200);
+  }
 
   @Override
   public ResponseEntity<?> makePeople(String name, String birthDate) {

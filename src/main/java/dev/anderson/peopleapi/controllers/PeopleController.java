@@ -33,6 +33,14 @@ public class PeopleController {
     return peopleServiceImplementation.listAll(page, size);
   }
 
+  @GetMapping
+  public ResponseEntity<?> findPeople(
+      @RequestParam(value = "name", required = true) String name,
+      @RequestParam(value = "birthDate", required = true) String birthDate
+  ) {
+    return peopleServiceImplementation.findPeople(name, birthDate);
+  }
+
   @PostMapping
   public ResponseEntity<?> makePeople(
       @RequestParam(value = "name", required = true) String name,
