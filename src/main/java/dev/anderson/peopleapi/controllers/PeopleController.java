@@ -4,6 +4,7 @@ import dev.anderson.peopleapi.domain.DTO.PeopleInputDTO;
 import dev.anderson.peopleapi.service.implementation.PeopleServiceImplementation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -50,6 +51,14 @@ public class PeopleController {
   public ResponseEntity<?> updatePeople(
       @RequestBody(required = true) PeopleInputDTO peopleInputDTO) {
     return peopleServiceImplementation.updatePeople(peopleInputDTO);
+  }
+
+  @DeleteMapping
+  public ResponseEntity<?> deletePeople(
+      @RequestParam(value = "name", required = true) String name,
+      @RequestParam(value = "birthDate", required = true) String birthDate
+  ) {
+    return peopleServiceImplementation.deletePeople(name, birthDate);
   }
 
 }

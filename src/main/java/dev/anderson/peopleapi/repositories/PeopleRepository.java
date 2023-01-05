@@ -17,5 +17,7 @@ public interface PeopleRepository extends JpaRepository<PeopleEntity, Long> {
 
   Page<PeopleEntity> findAll(Pageable pageable);
 
+  void deleteByNameAndBirthDate(String name, LocalDate birthDate);
+
 
 }

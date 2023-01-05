@@ -17,6 +17,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class PeopleServiceImplementation implements PeopleService {
@@ -90,6 +91,21 @@ public class PeopleServiceImplementation implements PeopleService {
 
     peopleEntity.get().updateNameAndDate(peopleInputDTO);
     peopleRepository.save(peopleEntity.get());
+    return new ResponseEntity<>(null, null, 200);
+  }
+
+  @Override
+  @Transactional
+  public ResponseEntity<?> deletePeople(String name, String birthDate) {
+    LocalDate entityDate = parseDate(birthDate);
+
+    if (!peopleRepository.existsByNameAndBirthDate(name, entityDate)) {
+      throw new UserNotFoundException(
+          "People with name: " + name + " and Birth Date: " + birthDate + "-> Not found"
+      );
+    }
+
+    peopleRepository.deleteByNameAndBirthDate(name, entityDate);
     return new ResponseEntity<>(null, null, 200);
   }
 

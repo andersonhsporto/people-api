@@ -13,4 +13,5 @@ public interface PeopleService {
 
   ResponseEntity<?> updatePeople(PeopleInputDTO peopleInputDTO);
 
+  ResponseEntity<?> deletePeople(String name, String birthDate);
 }
