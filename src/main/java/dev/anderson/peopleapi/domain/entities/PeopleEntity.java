@@ -21,7 +21,7 @@ public class PeopleEntity {
 
   private LocalDate birthDate;
 
-  @OneToMany(mappedBy = "people", cascade = CascadeType.ALL)
+  @OneToMany(cascade = CascadeType.ALL)
   private List<AddressEntity> addresses;
 
   public PeopleEntity() {
