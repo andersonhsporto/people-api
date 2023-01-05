@@ -33,6 +33,15 @@ public class PeopleEntity {
     this.addresses = addresses;
   }
 
+  public PeopleEntity(String name, LocalDate birthDate) {
+    this.name = name;
+    this.birthDate = birthDate;
+  }
+
+  static public PeopleEntity of(String name, LocalDate birthDate) {
+    return new PeopleEntity(name, birthDate);
+  }
+
   public Long getId() {
     return id;
   }
