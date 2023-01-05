@@ -21,8 +21,11 @@ public class PeopleController {
   }
 
   @GetMapping("/all")
-  public ResponseEntity<?> listAll() {
-    return peopleServiceImplementation.listAll();
+  public ResponseEntity<?> listAll(
+      @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
+      @RequestParam(value = "size", required = false, defaultValue = "4") Integer size
+  ) {
+    return peopleServiceImplementation.listAll(page, size);
   }
 
   @PostMapping

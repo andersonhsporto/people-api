@@ -3,6 +3,7 @@ package dev.anderson.peopleapi.domain.DTO;
 import dev.anderson.peopleapi.domain.entities.PeopleEntity;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.data.domain.Page;
 
 public record PeopleDTO(
     String name,
@@ -17,7 +18,7 @@ public record PeopleDTO(
     );
   }
 
-  public static List<PeopleDTO> fromList(List<PeopleEntity> peopleEntityList) {
+  public static List<PeopleDTO> fromPage(Page<PeopleEntity> peopleEntityList) {
     List<PeopleDTO> peopleDTOList = new ArrayList<>();
 
     for (PeopleEntity peopleEntity : peopleEntityList) {

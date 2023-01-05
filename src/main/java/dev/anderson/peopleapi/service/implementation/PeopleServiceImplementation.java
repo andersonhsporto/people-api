@@ -7,7 +7,10 @@ import dev.anderson.peopleapi.repositories.PeopleRepository;
 import dev.anderson.peopleapi.service.PeopleService;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -21,10 +24,11 @@ public class PeopleServiceImplementation implements PeopleService {
   }
 
   @Override
-  public ResponseEntity<?> listAll() {
-    List<PeopleEntity> peopleList = peopleRepository.findAll();
+  public ResponseEntity<?> listAll(Integer page, Integer size) {
+    Pageable pageRequest = PageRequest.of(page, size, Sort.by("name"));
+    Page<PeopleEntity> peopleList = peopleRepository.findAll(pageRequest);
 
-    return new ResponseEntity<>(PeopleDTO.fromList(peopleList), null, 200);
+    return new ResponseEntity<>(PeopleDTO.fromPage(peopleList), null, 200);
   }
 
 //  @Override

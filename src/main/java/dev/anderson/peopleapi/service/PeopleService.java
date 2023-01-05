@@ -4,7 +4,7 @@ import org.springframework.http.ResponseEntity;
 
 public interface PeopleService {
 
-  ResponseEntity<?> listAll();
+  ResponseEntity<?> listAll(Integer page, Integer size);
 
   ResponseEntity<?> makePeople(String name, String birthDate);
 
