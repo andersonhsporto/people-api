@@ -71,6 +71,10 @@ public class PeopleEntity {
     }
   }
 
+  public void updateAddress(AddressEntity addressEntity) {
+    this.addresses.add(addressEntity);
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -88,5 +92,15 @@ public class PeopleEntity {
   @Override
   public int hashCode() {
     return Objects.hash(id, name, birthDate, addresses);
+  }
+
+  @Override
+  public String toString() {
+    return "PeopleEntity{" +
+        "id=" + id +
+        ", name='" + name + '\'' +
+        ", birthDate=" + birthDate +
+        ", addresses=" + addresses +
+        '}';
   }
 }
