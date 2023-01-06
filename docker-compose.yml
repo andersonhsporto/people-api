@@ -1,0 +1,11 @@
+services:
+  app:
+    image: 'people-api-v1:latest'
+    container_name: people-api
+    build:
+      context: .
+    ports:
+      - '8080:8080'
+
+volumes:
+  volumes:
