@@ -50,6 +50,15 @@ public class AddressServiceImplementation implements AddressService {
     return new ResponseEntity<>(null, null, 201);
   }
 
+  @Override
+  public ResponseEntity<?> deleteAddress(String name, String birthDate, AddressDTO addressDTO) {
+    PeopleEntity peopleEntity = findEntity(name, birthDate);
+
+    peopleEntity.deleteAddress(AddressEntity.fromDTO(addressDTO));
+    peopleRepository.save(peopleEntity);
+    return new ResponseEntity<>(null, null, 200);
+  }
+
   private PeopleEntity findEntity(String name, String birthDate) {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
 

@@ -10,4 +10,6 @@ public interface AddressService {
   ResponseEntity<?> findAddress(String name, String birthDate);
 
   ResponseEntity<?> makeAddress(String name, String birthDate, AddressDTO addressDTO);
+
+  ResponseEntity<?> deleteAddress(String name, String birthDate, AddressDTO addressDTO);
 }
