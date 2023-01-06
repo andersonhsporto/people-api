@@ -4,6 +4,7 @@ import dev.anderson.peopleapi.domain.DTO.AddressDTO;
 import dev.anderson.peopleapi.service.implementation.AddressServiceImplementation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -41,6 +42,15 @@ public class AddressController {
       @RequestBody(required = true) AddressDTO addressDTO
   ) {
     return addressServiceImplementation.makeAddress(name, birthDate, addressDTO);
+  }
+
+  @DeleteMapping
+  ResponseEntity<?> deleteAddress(
+      @RequestParam(value = "name", required = true) String name,
+      @RequestParam(value = "birthDate", required = true) String birthDate,
+      @RequestBody(required = true) AddressDTO addressDTO
+  ) {
+    return addressServiceImplementation.deleteAddress(name, birthDate, addressDTO);
   }
 
 }
