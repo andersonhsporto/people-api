@@ -75,6 +75,10 @@ public class PeopleEntity {
     this.addresses.add(addressEntity);
   }
 
+  public void deleteAddress(AddressEntity addressEntity) {
+    this.addresses.remove(addressEntity);
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
