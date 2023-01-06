@@ -66,7 +66,7 @@ public class PeopleServiceImplementation implements PeopleService {
     } else {
       peopleRepository.save(PeopleEntity.of(name, entityDate));
     }
-    return new ResponseEntity<>(null, null, 200);
+    return new ResponseEntity<>(null, null, 201);
   }
 
   @Override

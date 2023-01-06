@@ -1,5 +1,6 @@
 package dev.anderson.peopleapi.domain.entities;
 
+import dev.anderson.peopleapi.domain.DTO.AddressDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -41,6 +42,13 @@ public class AddressEntity {
     this.people = people;
   }
 
+  public AddressEntity(String publicPlace, String number, String city, String cep) {
+    this.publicPlace = publicPlace;
+    this.number = number;
+    this.city = city;
+    this.cep = cep;
+  }
+
   public Long getId() {
     return id;
   }
@@ -64,6 +72,16 @@ public class AddressEntity {
   public PeopleEntity getPeople() {
     return people;
   }
+
+  public static AddressEntity fromDTO(AddressDTO addressDTO) {
+    return new AddressEntity(
+        addressDTO.publicPlace(),
+        addressDTO.number(),
+        addressDTO.city(),
+        addressDTO.cep()
+    );
+  }
+
 
   @Override
   public boolean equals(Object o) {
