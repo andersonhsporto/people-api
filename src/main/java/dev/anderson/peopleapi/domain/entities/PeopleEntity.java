@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -38,6 +39,7 @@ public class PeopleEntity {
   public PeopleEntity(String name, LocalDate birthDate) {
     this.name = name;
     this.birthDate = birthDate;
+    this.addresses = new ArrayList<>();
   }
 
   static public PeopleEntity of(String name, LocalDate birthDate) {
