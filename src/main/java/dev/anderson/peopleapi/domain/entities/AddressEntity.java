@@ -6,7 +6,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import java.util.Objects;
 
 @Entity
 public class AddressEntity {
@@ -29,28 +28,11 @@ public class AddressEntity {
   public AddressEntity() {
   }
 
-  public AddressEntity(
-      String publicPlace,
-      String number,
-      String city,
-      String cep,
-      PeopleEntity people) {
-    this.publicPlace = publicPlace;
-    this.number = number;
-    this.city = city;
-    this.cep = cep;
-    this.people = people;
-  }
-
   public AddressEntity(String publicPlace, String number, String city, String cep) {
     this.publicPlace = publicPlace;
     this.number = number;
     this.city = city;
     this.cep = cep;
-  }
-
-  public Long getId() {
-    return id;
   }
 
   public String getPublicPlace() {
@@ -69,9 +51,6 @@ public class AddressEntity {
     return cep;
   }
 
-  public PeopleEntity getPeople() {
-    return people;
-  }
 
   public static AddressEntity fromDTO(AddressDTO addressDTO) {
     return new AddressEntity(
@@ -82,23 +61,4 @@ public class AddressEntity {
     );
   }
 
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    AddressEntity that = (AddressEntity) o;
-    return Objects.equals(id, that.id) && Objects.equals(publicPlace,
-        that.publicPlace) && Objects.equals(number, that.number)
-        && Objects.equals(city, that.city) && Objects.equals(cep, that.cep);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, publicPlace, number, city, cep);
-  }
 }

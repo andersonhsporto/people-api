@@ -3,6 +3,7 @@ package dev.anderson.peopleapi.domain.entities;
 import dev.anderson.peopleapi.domain.DTO.PeopleInputDTO;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -10,7 +11,6 @@ import jakarta.persistence.OneToMany;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 public class PeopleEntity {
@@ -23,7 +23,7 @@ public class PeopleEntity {
 
   private LocalDate birthDate;
 
-  @OneToMany(cascade = CascadeType.ALL)
+  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   private List<AddressEntity> addresses;
 
   public PeopleEntity() {
@@ -42,10 +42,6 @@ public class PeopleEntity {
 
   static public PeopleEntity of(String name, LocalDate birthDate) {
     return new PeopleEntity(name, birthDate);
-  }
-
-  public Long getId() {
-    return id;
   }
 
   public String getName() {
@@ -79,32 +75,4 @@ public class PeopleEntity {
     this.addresses.remove(addressEntity);
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    PeopleEntity that = (PeopleEntity) o;
-    return Objects.equals(id, that.id) && Objects.equals(name, that.name)
-        && Objects.equals(birthDate, that.birthDate) && Objects.equals(addresses,
-        that.addresses);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, name, birthDate, addresses);
-  }
-
-  @Override
-  public String toString() {
-    return "PeopleEntity{" +
-        "id=" + id +
-        ", name='" + name + '\'' +
-        ", birthDate=" + birthDate +
-        ", addresses=" + addresses +
-        '}';
-  }
 }

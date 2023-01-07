@@ -9,10 +9,8 @@ import dev.anderson.peopleapi.repositories.PeopleRepository;
 import dev.anderson.peopleapi.service.PeopleService;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -30,8 +28,8 @@ public class PeopleServiceImplementation implements PeopleService {
 
   @Override
   public ResponseEntity<?> listAll(Integer page, Integer size) {
-    Pageable pageRequest = PageRequest.of(page, size, Sort.by("name"));
-    Page<PeopleEntity> peoplePages = peopleRepository.findAll(pageRequest);
+    var pageRequest = PageRequest.of(page, size, Sort.by("name"));
+    var peoplePages = peopleRepository.findAll(pageRequest);
 
     return new ResponseEntity<>(
         PeopleDTO.fromPage(peoplePages),
@@ -41,7 +39,7 @@ public class PeopleServiceImplementation implements PeopleService {
 
   @Override
   public ResponseEntity<?> findPeople(String name, String birthDate) {
-    LocalDate entityDate = parseDate(birthDate);
+    var entityDate = parseDate(birthDate);
 
     if (!peopleRepository.existsByNameAndBirthDate(name, entityDate)) {
       throw new UserNotFoundException(
@@ -50,14 +48,13 @@ public class PeopleServiceImplementation implements PeopleService {
       );
     }
 
-    Optional<PeopleEntity> peopleEntity
-        = peopleRepository.findByNameAndBirthDate(name, entityDate);
+    var peopleEntity = peopleRepository.findByNameAndBirthDate(name, entityDate);
     return new ResponseEntity<>(PeopleDTO.of(peopleEntity.get()), null, 200);
   }
 
   @Override
   public ResponseEntity<?> makePeople(String name, String birthDate) {
-    LocalDate entityDate = parseDate(birthDate);
+    var entityDate = parseDate(birthDate);
 
     if (peopleRepository.existsByNameAndBirthDate(name, entityDate)) {
       throw new UserExistsException(
@@ -71,11 +68,10 @@ public class PeopleServiceImplementation implements PeopleService {
 
   @Override
   public ResponseEntity<?> replacePeople(PeopleInputDTO peopleInputDTO) {
-    LocalDate entityDate = parseDate(peopleInputDTO.birthDate());
+    var entityDate = parseDate(peopleInputDTO.birthDate());
 
     if (dtoExists(peopleInputDTO)) {
-      Optional<PeopleEntity> peopleEntity
-          = peopleRepository.findByNameAndBirthDate(peopleInputDTO.name(), entityDate);
+      var peopleEntity = peopleRepository.findByNameAndBirthDate(peopleInputDTO.name(), entityDate);
 
       peopleEntity.get().updateNameAndDate(peopleInputDTO);
       peopleRepository.save(peopleEntity.get());
@@ -85,7 +81,7 @@ public class PeopleServiceImplementation implements PeopleService {
 
   @Override
   public ResponseEntity<?> updatePeople(PeopleInputDTO peopleInputDTO) {
-    LocalDate entityDate = parseDate(peopleInputDTO.birthDate());
+    var entityDate = parseDate(peopleInputDTO.birthDate());
 
     if (!peopleRepository.existsByNameAndBirthDate(peopleInputDTO.name(), entityDate)) {
       throw new UserNotFoundException(
@@ -94,8 +90,7 @@ public class PeopleServiceImplementation implements PeopleService {
       );
     }
 
-    Optional<PeopleEntity> peopleEntity
-        = peopleRepository.findByNameAndBirthDate(peopleInputDTO.name(), entityDate);
+    var peopleEntity = peopleRepository.findByNameAndBirthDate(peopleInputDTO.name(), entityDate);
 
     peopleEntity.get().updateNameAndDate(peopleInputDTO);
     peopleRepository.save(peopleEntity.get());
@@ -105,7 +100,7 @@ public class PeopleServiceImplementation implements PeopleService {
   @Override
   @Transactional
   public ResponseEntity<?> deletePeople(String name, String birthDate) {
-    LocalDate entityDate = parseDate(birthDate);
+    var entityDate = parseDate(birthDate);
 
     if (!peopleRepository.existsByNameAndBirthDate(name, entityDate)) {
       throw new UserNotFoundException(
@@ -118,8 +113,8 @@ public class PeopleServiceImplementation implements PeopleService {
   }
 
   private boolean dtoExists(PeopleInputDTO peopleInputDTO) {
-    LocalDate oldDate = parseDate(peopleInputDTO.birthDate());
-    LocalDate newDate = parseDate(peopleInputDTO.newBirthDate());
+    var oldDate = parseDate(peopleInputDTO.birthDate());
+    var newDate = parseDate(peopleInputDTO.newBirthDate());
 
     if (!peopleRepository.existsByNameAndBirthDate(peopleInputDTO.name(), oldDate)) {
       throw new UserNotFoundException(
