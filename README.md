@@ -45,7 +45,7 @@ docker-compose up
 
 ## Requisitos de sistema
 
-- Possuir a JDK 11
+- Possuir a JDK 19
 - Uma IDE ou editor de sua preferência
 
 ## Dependências
