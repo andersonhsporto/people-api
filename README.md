@@ -62,6 +62,11 @@ arquivo [pom.xml](https://github.com/andersonhsporto/api-consulta-banco/blob/mas
 |     SpringDoc-openapi-ui     |             Responsável pela documentação da API Rest             |  1.6.2  |
 |     hibernate-validator      |      Responsável pela validação dos dados recebidos pela API      |  6.2.0  |
 
+Para executar os tests com o postman utilize o botão abaixo:
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/19722349-3916d478-7ada-4c78-8d3c-4bc89ff25742?action=collection%2Ffork&collection-url=entityId%3D19722349-3916d478-7ada-4c78-8d3c-4bc89ff25742%26entityType%3Dcollection%26workspaceId%3Dc44aa6ae-00bd-4d10-a09f-6343c20da5ae)
+
+
 <p align=left> <b>Minhas informações de contato 📬</b></p>
 <p align=left>
 <a href="https://github.com/andersonhsporto" target="_blank"><img src="https://img.shields.io/badge/Github-181717?logo=Github&logoColor=white"/></a>  
