@@ -9,9 +9,9 @@ import dev.anderson.peopleapi.repositories.PeopleRepository;
 import dev.anderson.peopleapi.service.AddressService;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class AddressServiceImplementation implements AddressService {
@@ -35,15 +35,15 @@ public class AddressServiceImplementation implements AddressService {
 
   @Override
   public ResponseEntity<?> findAddress(String name, String birthDate) {
-    PeopleEntity peopleEntity = findEntity(name, birthDate);
+    var peopleEntity = findEntity(name, birthDate);
+    var addressList = peopleEntity.getAddresses();
 
-    List<AddressEntity> addressList = peopleEntity.getAddresses();
     return new ResponseEntity<>(AddressDTO.fromEntityList(addressList), null, 200);
   }
 
   @Override
   public ResponseEntity<?> makeAddress(String name, String birthDate, AddressDTO addressDTO) {
-    PeopleEntity peopleEntity = findEntity(name, birthDate);
+    var peopleEntity = findEntity(name, birthDate);
 
     peopleEntity.updateAddress(AddressEntity.fromDTO(addressDTO));
     peopleRepository.save(peopleEntity);
@@ -51,8 +51,9 @@ public class AddressServiceImplementation implements AddressService {
   }
 
   @Override
+  @Transactional
   public ResponseEntity<?> deleteAddress(String name, String birthDate, AddressDTO addressDTO) {
-    PeopleEntity peopleEntity = findEntity(name, birthDate);
+    var peopleEntity = findEntity(name, birthDate);
 
     peopleEntity.deleteAddress(AddressEntity.fromDTO(addressDTO));
     peopleRepository.save(peopleEntity);
@@ -60,7 +61,7 @@ public class AddressServiceImplementation implements AddressService {
   }
 
   private PeopleEntity findEntity(String name, String birthDate) {
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+    var formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
 
     return peopleRepository
         .findByNameAndBirthDate(name, LocalDate.parse(birthDate, formatter))
@@ -69,6 +70,5 @@ public class AddressServiceImplementation implements AddressService {
                 + birthDate + "-> Not found"
         ));
   }
-
 
 }

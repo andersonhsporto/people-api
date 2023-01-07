@@ -3,6 +3,7 @@ package dev.anderson.peopleapi.domain.entities;
 import dev.anderson.peopleapi.domain.DTO.PeopleInputDTO;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -23,7 +24,7 @@ public class PeopleEntity {
 
   private LocalDate birthDate;
 
-  @OneToMany(cascade = CascadeType.ALL)
+  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   private List<AddressEntity> addresses;
 
   public PeopleEntity() {
