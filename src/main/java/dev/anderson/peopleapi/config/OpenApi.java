@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 public class OpenApi {
 
   @Bean
-  public OpenAPI springShopOpenAPI() {
+  public OpenAPI springPeopleAPI() {
     return new OpenAPI()
         .info(new Info().title("People API")
             .description("People management API")
