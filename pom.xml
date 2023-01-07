@@ -35,15 +35,9 @@
     </dependency>
 
     <dependency>
-      <artifactId>springfox-boot-starter</artifactId>
-      <groupId>io.springfox</groupId>
-      <version>3.0.0</version>
-    </dependency>
-
-    <dependency>
-      <artifactId>springfox-swagger-ui</artifactId>
-      <groupId>io.springfox</groupId>
-      <version>3.0.0</version>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-ui</artifactId>
+      <version>1.6.14</version>
     </dependency>
 
     <dependency>
@@ -51,6 +45,15 @@
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
+
+
+    <dependency>
+      <groupId>org.hibernate.validator</groupId>
+      <artifactId>hibernate-validator</artifactId>
+      <version>8.0.0.Final</version>
+    </dependency>
+
+
   </dependencies>
 
   <build>
