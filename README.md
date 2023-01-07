@@ -2,7 +2,7 @@
 
 ## Descrição
 
-- Projeto de uma API de pessoas, com cadastro de pessoas, endereços e telefones.
+- Projeto de uma API de pessoas, com cadastro de pessoas e seus endereços.
 
 ## Tecnologias
 
