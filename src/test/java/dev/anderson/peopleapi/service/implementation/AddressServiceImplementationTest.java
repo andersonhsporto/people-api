@@ -5,7 +5,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import dev.anderson.peopleapi.domain.DTO.AddressDTO;
 import dev.anderson.peopleapi.domain.entities.AddressEntity;
 import dev.anderson.peopleapi.domain.entities.PeopleEntity;
-import dev.anderson.peopleapi.repositories.AddressRepository;
 import dev.anderson.peopleapi.repositories.PeopleRepository;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -28,9 +27,6 @@ class AddressServiceImplementationTest {
 
   @Autowired
   private AddressServiceImplementation addressServiceImplementation;
-
-  @Autowired
-  private AddressRepository addressRepository;
 
   @Autowired
   private PeopleRepository peopleRepository;
