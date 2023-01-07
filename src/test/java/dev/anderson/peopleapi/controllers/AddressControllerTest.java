@@ -33,9 +33,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 class AddressControllerTest {
 
   @Autowired
-  private AddressController addressController;
-
-  @Autowired
   private PeopleRepository peopleRepository;
 
   @Autowired
